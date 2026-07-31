@@ -1,0 +1,8 @@
+# Local development + offline model training only. NEVER deployed to Vercel.
+-r requirements.txt
+
+uvicorn[standard]==0.34.0
+scikit-learn==1.6.0
+scipy==1.15.0
+joblib==1.4.2
+httpx==0.28.1

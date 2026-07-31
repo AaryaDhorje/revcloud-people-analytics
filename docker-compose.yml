@@ -1,0 +1,25 @@
+# Local development database only.
+# Production uses the managed Postgres behind DATABASE_URL.
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: revcloud-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: revcloud
+      POSTGRES_PASSWORD: revcloud
+      POSTGRES_DB: revcloud
+    # 5432 is the host's own Postgres and 5433 was already bound, so the dev
+    # container lives on 5434 to stay out of the way.
+    ports:
+      - "5434:5432"
+    volumes:
+      - revcloud-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U revcloud -d revcloud"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  revcloud-pgdata:

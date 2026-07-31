@@ -1,0 +1,395 @@
+{
+  "version": "1.0",
+  "model_type": "logistic_regression",
+  "trained_at": "2026-07-31T16:18:08+00:00",
+  "training_rows": 1470,
+  "positive_rate": 0.1612,
+  "intercept": -2.805453,
+  "bands": {
+    "high": 0.65,
+    "medium": 0.4
+  },
+  "metrics": {
+    "holdout_roc_auc": 0.8087,
+    "holdout_pr_auc": 0.5593,
+    "brier_score": 0.1476,
+    "cv_roc_auc_mean": 0.8261,
+    "cv_roc_auc_std": 0.0225
+  },
+  "features": [
+    {
+      "name": "age",
+      "kind": "numeric",
+      "source": "age",
+      "mean": 36.92381,
+      "std": 9.132266,
+      "label": "Age",
+      "coef": -0.183534
+    },
+    {
+      "name": "daily_rate",
+      "kind": "numeric",
+      "source": "daily_rate",
+      "mean": 802.485714,
+      "std": 403.371829,
+      "label": "Daily rate",
+      "coef": -0.131727
+    },
+    {
+      "name": "distance_from_home",
+      "kind": "numeric",
+      "source": "distance_from_home",
+      "mean": 9.192517,
+      "std": 8.104107,
+      "label": "Distance from home",
+      "coef": 0.289336
+    },
+    {
+      "name": "education",
+      "kind": "numeric",
+      "source": "education",
+      "mean": 2.912925,
+      "std": 1.023817,
+      "label": "Education level",
+      "coef": 0.000509
+    },
+    {
+      "name": "environment_satisfaction",
+      "kind": "numeric",
+      "source": "environment_satisfaction",
+      "mean": 2.721769,
+      "std": 1.09271,
+      "label": "Environment satisfaction",
+      "coef": -0.416207
+    },
+    {
+      "name": "hourly_rate",
+      "kind": "numeric",
+      "source": "hourly_rate",
+      "mean": 65.891156,
+      "std": 20.322512,
+      "label": "Hourly rate",
+      "coef": -0.014829
+    },
+    {
+      "name": "job_involvement",
+      "kind": "numeric",
+      "source": "job_involvement",
+      "mean": 2.729932,
+      "std": 0.711319,
+      "label": "Job involvement",
+      "coef": -0.315724
+    },
+    {
+      "name": "job_level",
+      "kind": "numeric",
+      "source": "job_level",
+      "mean": 2.063946,
+      "std": 1.106563,
+      "label": "Job level",
+      "coef": 0.062825
+    },
+    {
+      "name": "job_satisfaction",
+      "kind": "numeric",
+      "source": "job_satisfaction",
+      "mean": 2.728571,
+      "std": 1.102471,
+      "label": "Job satisfaction",
+      "coef": -0.389887
+    },
+    {
+      "name": "monthly_income",
+      "kind": "numeric",
+      "source": "monthly_income",
+      "mean": 6502.931293,
+      "std": 4706.355165,
+      "label": "Monthly income",
+      "coef": -0.21902
+    },
+    {
+      "name": "monthly_rate",
+      "kind": "numeric",
+      "source": "monthly_rate",
+      "mean": 14313.103401,
+      "std": 7115.364617,
+      "label": "Monthly rate",
+      "coef": 0.053934
+    },
+    {
+      "name": "num_companies_worked",
+      "kind": "numeric",
+      "source": "num_companies_worked",
+      "mean": 2.693197,
+      "std": 2.497159,
+      "label": "Number of previous employers",
+      "coef": 0.398975
+    },
+    {
+      "name": "percent_salary_hike",
+      "kind": "numeric",
+      "source": "percent_salary_hike",
+      "mean": 15.209524,
+      "std": 3.658693,
+      "label": "Last salary increase %",
+      "coef": -0.174571
+    },
+    {
+      "name": "performance_rating",
+      "kind": "numeric",
+      "source": "performance_rating",
+      "mean": 3.153741,
+      "std": 0.360701,
+      "label": "Performance rating",
+      "coef": 0.073322
+    },
+    {
+      "name": "relationship_satisfaction",
+      "kind": "numeric",
+      "source": "relationship_satisfaction",
+      "mean": 2.712245,
+      "std": 1.080841,
+      "label": "Relationship satisfaction",
+      "coef": -0.219009
+    },
+    {
+      "name": "stock_option_level",
+      "kind": "numeric",
+      "source": "stock_option_level",
+      "mean": 0.793878,
+      "std": 0.851787,
+      "label": "Stock option level",
+      "coef": -0.157853
+    },
+    {
+      "name": "total_working_years",
+      "kind": "numeric",
+      "source": "total_working_years",
+      "mean": 11.279592,
+      "std": 7.778135,
+      "label": "Total working years",
+      "coef": -0.388248
+    },
+    {
+      "name": "training_times_last_year",
+      "kind": "numeric",
+      "source": "training_times_last_year",
+      "mean": 2.79932,
+      "std": 1.288832,
+      "label": "Trainings last year",
+      "coef": -0.226578
+    },
+    {
+      "name": "work_life_balance",
+      "kind": "numeric",
+      "source": "work_life_balance",
+      "mean": 2.761224,
+      "std": 0.706235,
+      "label": "Work-life balance",
+      "coef": -0.196154
+    },
+    {
+      "name": "years_at_company",
+      "kind": "numeric",
+      "source": "years_at_company",
+      "mean": 7.008163,
+      "std": 6.124441,
+      "label": "Years at company",
+      "coef": 0.65578
+    },
+    {
+      "name": "years_in_current_role",
+      "kind": "numeric",
+      "source": "years_in_current_role",
+      "mean": 4.229252,
+      "std": 3.621904,
+      "label": "Years in current role",
+      "coef": -0.484847
+    },
+    {
+      "name": "years_since_last_promotion",
+      "kind": "numeric",
+      "source": "years_since_last_promotion",
+      "mean": 2.187755,
+      "std": 3.221334,
+      "label": "Years since last promotion",
+      "coef": 0.496698
+    },
+    {
+      "name": "years_with_curr_manager",
+      "kind": "numeric",
+      "source": "years_with_curr_manager",
+      "mean": 4.123129,
+      "std": 3.566922,
+      "label": "Years with current manager",
+      "coef": -0.505065
+    },
+    {
+      "name": "over_time",
+      "kind": "binary",
+      "source": "over_time",
+      "label": "Works overtime",
+      "coef": 1.651311
+    },
+    {
+      "name": "business_travel=Travel_Frequently",
+      "kind": "category",
+      "source": "business_travel",
+      "level": "Travel_Frequently",
+      "label": "Business travel: Travel Frequently",
+      "coef": 1.420726
+    },
+    {
+      "name": "business_travel=Travel_Rarely",
+      "kind": "category",
+      "source": "business_travel",
+      "level": "Travel_Rarely",
+      "label": "Business travel: Travel Rarely",
+      "coef": 0.75424
+    },
+    {
+      "name": "department=Research & Development",
+      "kind": "category",
+      "source": "department",
+      "level": "Research & Development",
+      "label": "Department: Research & Development",
+      "coef": -0.252172
+    },
+    {
+      "name": "department=Sales",
+      "kind": "category",
+      "source": "department",
+      "level": "Sales",
+      "label": "Department: Sales",
+      "coef": 0.409276
+    },
+    {
+      "name": "education_field=Life Sciences",
+      "kind": "category",
+      "source": "education_field",
+      "level": "Life Sciences",
+      "label": "Education field: Life Sciences",
+      "coef": -0.472052
+    },
+    {
+      "name": "education_field=Marketing",
+      "kind": "category",
+      "source": "education_field",
+      "level": "Marketing",
+      "label": "Education field: Marketing",
+      "coef": -0.070227
+    },
+    {
+      "name": "education_field=Medical",
+      "kind": "category",
+      "source": "education_field",
+      "level": "Medical",
+      "label": "Education field: Medical",
+      "coef": -0.377497
+    },
+    {
+      "name": "education_field=Other",
+      "kind": "category",
+      "source": "education_field",
+      "level": "Other",
+      "label": "Education field: Other",
+      "coef": -0.317995
+    },
+    {
+      "name": "education_field=Technical Degree",
+      "kind": "category",
+      "source": "education_field",
+      "level": "Technical Degree",
+      "label": "Education field: Technical Degree",
+      "coef": 0.566739
+    },
+    {
+      "name": "gender=Male",
+      "kind": "category",
+      "source": "gender",
+      "level": "Male",
+      "label": "Gender: Male",
+      "coef": 0.343875
+    },
+    {
+      "name": "job_role=Human Resources",
+      "kind": "category",
+      "source": "job_role",
+      "level": "Human Resources",
+      "label": "Job role: Human Resources",
+      "coef": 0.501537
+    },
+    {
+      "name": "job_role=Laboratory Technician",
+      "kind": "category",
+      "source": "job_role",
+      "level": "Laboratory Technician",
+      "label": "Job role: Laboratory Technician",
+      "coef": 1.023954
+    },
+    {
+      "name": "job_role=Manager",
+      "kind": "category",
+      "source": "job_role",
+      "level": "Manager",
+      "label": "Job role: Manager",
+      "coef": -0.277459
+    },
+    {
+      "name": "job_role=Manufacturing Director",
+      "kind": "category",
+      "source": "job_role",
+      "level": "Manufacturing Director",
+      "label": "Job role: Manufacturing Director",
+      "coef": 0.195383
+    },
+    {
+      "name": "job_role=Research Director",
+      "kind": "category",
+      "source": "job_role",
+      "level": "Research Director",
+      "label": "Job role: Research Director",
+      "coef": -0.641315
+    },
+    {
+      "name": "job_role=Research Scientist",
+      "kind": "category",
+      "source": "job_role",
+      "level": "Research Scientist",
+      "label": "Job role: Research Scientist",
+      "coef": 0.179027
+    },
+    {
+      "name": "job_role=Sales Executive",
+      "kind": "category",
+      "source": "job_role",
+      "level": "Sales Executive",
+      "label": "Job role: Sales Executive",
+      "coef": 0.075974
+    },
+    {
+      "name": "job_role=Sales Representative",
+      "kind": "category",
+      "source": "job_role",
+      "level": "Sales Representative",
+      "label": "Job role: Sales Representative",
+      "coef": 0.888647
+    },
+    {
+      "name": "marital_status=Married",
+      "kind": "category",
+      "source": "marital_status",
+      "level": "Married",
+      "label": "Marital status: Married",
+      "coef": 0.459178
+    },
+    {
+      "name": "marital_status=Single",
+      "kind": "category",
+      "source": "marital_status",
+      "level": "Single",
+      "label": "Marital status: Single",
+      "coef": 1.072832
+    }
+  ]
+}

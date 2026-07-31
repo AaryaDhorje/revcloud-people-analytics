@@ -39,3 +39,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# keep the template even though .env* is ignored above
+!.env.example
+
+# verification artefacts
+/.ui-shots/
+
+# Source brief — kept local. Contains third-party email addresses and the
+# client's unreleased product brief; the README documents its requirements.
+/docs/

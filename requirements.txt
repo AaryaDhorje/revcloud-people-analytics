@@ -1,0 +1,21 @@
+# Runtime dependencies — these ship to the Vercel Python function.
+# Keep this list lean: the unzipped bundle must stay under Vercel's 250 MB cap.
+# Deliberately absent: scikit-learn / scipy. The attrition model is trained
+# offline (see requirements-dev.txt) and shipped as plain JSON coefficients,
+# so runtime scoring only needs numpy.
+
+fastapi==0.115.6
+pydantic==2.10.4
+pydantic-settings==2.7.0
+email-validator==2.2.0
+python-multipart==0.0.20
+
+sqlalchemy==2.0.36
+asyncpg==0.30.0
+greenlet==3.1.1
+
+PyJWT==2.10.1
+bcrypt==4.2.1
+
+pandas==2.2.3
+numpy==2.2.1
