@@ -146,8 +146,12 @@ async function run() {
 
     await signIn(page, ACCOUNTS.admin);
     await page.waitForSelector("text=Workforce Overview", { timeout: 30000 });
-    // Let Recharts finish its initial layout pass.
-    await page.waitForTimeout(2500);
+    // Wait for the data to actually arrive rather than sleeping a fixed
+    // interval. Against a production deployment the first authenticated
+    // request pays both a serverless cold start and a Neon cold start, which
+    // is far longer than any sleep worth hardcoding.
+    await page.waitForSelector("svg.recharts-surface", { timeout: 90000 });
+    await page.waitForTimeout(1500);
 
     check("overview heading renders",
       await page.getByRole("heading", { name: "Workforce Overview" }).isVisible());
@@ -212,7 +216,8 @@ async function run() {
     await page.waitForSelector("text=Talent & Retention Deep Dive", {
       timeout: 30000,
     });
-    await page.waitForTimeout(3000);
+    await page.waitForSelector(".recharts-scatter-symbol", { timeout: 90000 });
+    await page.waitForTimeout(1500);
 
     check("scatter rendered",
       (await page.locator(".recharts-scatter-symbol").count()) > 0);
@@ -349,7 +354,8 @@ async function run() {
 
     await signIn(page, ACCOUNTS.manager);
     await page.waitForSelector("text=Workforce Overview", { timeout: 30000 });
-    await page.waitForTimeout(2500);
+    await page.waitForSelector("svg.recharts-surface", { timeout: 90000 });
+    await page.waitForTimeout(1500);
 
     check("manager sees the scope notice",
       (await page.getByText(/Scoped to the Research & Development/i).count()) > 0);
@@ -384,7 +390,8 @@ async function run() {
 
     await signIn(page, ACCOUNTS.viewer);
     await page.waitForSelector("text=Workforce Overview", { timeout: 30000 });
-    await page.waitForTimeout(2000);
+    await page.waitForSelector("svg.recharts-surface", { timeout: 90000 });
+    await page.waitForTimeout(1500);
 
     check("viewer sees company-wide data",
       (await page.getByText("1,470", { exact: false }).count()) > 0);
