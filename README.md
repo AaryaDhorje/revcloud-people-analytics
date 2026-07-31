@@ -127,8 +127,9 @@ sticky sessions on Vercel, and `EventSource` reconnects on its own.
 Change detection watches an integer in a single-row table rather than using
 Postgres `LISTEN/NOTIFY`: NOTIFY needs a connection held open for the
 listener's lifetime, which neither a serverless function nor a transaction-mode
-pooler will give you. The stream closes itself at ~50s to stay inside Vercel's
-60s function ceiling; the browser reconnects immediately.
+pooler will give you. The stream closes itself at 240s, inside Vercel's 300s
+function ceiling, so it always ends on its own terms rather than being cut off
+mid-frame; the browser reconnects immediately.
 
 ### Why the model is trained offline
 
@@ -137,9 +138,18 @@ exports coefficients, standardisation parameters and one-hot levels to
 `backend/ml/model.json` (10 KB). At runtime `backend/ml/score.py` reads that
 file and scores with numpy alone.
 
-This is not premature optimisation. The measured runtime bundle is **~180 MB
-against Vercel's 250 MB limit**; scikit-learn drags in scipy and would add
-roughly 130 MB, blowing the cap. Shipping coefficients avoids that entirely.
+Vercel Functions allow packages up to 5 GB, so this is not required to fit a
+size limit — the measured runtime bundle is ~180 MB and adding scikit-learn
+plus scipy (~130 MB) would still fit comfortably. It is done for three reasons
+that do still hold:
+
+* **Cold starts.** Importing scikit-learn and scipy costs real time on a cold
+  invocation. Reading a 10 KB JSON file costs none.
+* **Reproducibility.** The deployed artefact is a diffable text file with the
+  training metrics recorded inside it, not a pickle bound to one library
+  version.
+* **Separation.** Training is a deliberate, reviewable step, not something that
+  can happen implicitly on a web request.
 
 A linear model is also a deliberate choice over gradient boosting: the product
 shows *why* someone is flagged, and for a linear model "contribution =
@@ -297,8 +307,8 @@ for `?department=Sales`, and a manager fetching a Sales employee by ID.
   `api/index.py`. In development the same paths proxy to a local uvicorn, so
   the browser always sees one origin and cookies stay first-party.
 * SSE streams end every ~50s by design; `EventSource` reconnects. On a plan
-  with a longer function ceiling, raise `STREAM_LIFETIME_SECONDS` in
-  `backend/routers/events.py`.
+  ceiling, adjust `STREAM_LIFETIME_SECONDS` in
+  `backend/routers/events.py` and `maxDuration` in `vercel.json` together.
 * Use a pooled connection string. The engine uses `NullPool` with
   `statement_cache_size=0`, which is what transaction-mode poolers require.
 * `requirements-dev.txt` (scikit-learn, uvicorn, Playwright helpers) is never

@@ -2,7 +2,9 @@
 
 Deliberately numpy-only. The logistic regression is fitted offline by
 `scripts/train_model.py` and exported to `model.json` as plain coefficients, so
-scikit-learn and scipy (~150 MB together) never enter the Vercel bundle.
+scikit-learn and scipy never enter the deployed bundle — which keeps cold
+starts short and makes the shipped artefact a diffable text file rather than a
+version-bound pickle.
 
 The model is linear, which is what makes per-employee explanation honest: the
 contribution of a feature really is `coefficient x value`, not a post-hoc

@@ -55,3 +55,6 @@ __pycache__/
 # Source brief — kept local. Contains third-party email addresses and the
 # client's unreleased product brief; the README documents its requirements.
 /docs/
+
+.vercel
+.env*

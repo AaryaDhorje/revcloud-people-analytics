@@ -30,9 +30,10 @@ from backend.models import RealtimeState
 router = APIRouter(prefix="/api/py/events", tags=["events"])
 
 POLL_SECONDS = 2.0
-# Vercel's function ceiling is 60s (see vercel.json); leave headroom so we
-# always close on our own terms.
-STREAM_LIFETIME_SECONDS = 50.0
+# Vercel functions allow up to 300s (see vercel.json). Ending the stream well
+# short of that means we always close on our own terms rather than being cut
+# off mid-frame, while still keeping reconnects infrequent.
+STREAM_LIFETIME_SECONDS = 240.0
 # Below the lifetime, so the browser reconnects promptly after each cycle.
 CLIENT_RETRY_MS = 3000
 
