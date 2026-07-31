@@ -11,13 +11,31 @@ from sqlalchemy.pool import NullPool
 from backend.config import settings
 
 
-def _split_ssl_option(url: str) -> tuple[str, dict]:
-    """Move libpq-style SSL params out of the URL and into asyncpg connect args.
+# libpq query parameters that asyncpg does not accept. SQLAlchemy forwards
+# leftover query params to the driver as keyword arguments, so anything left
+# here becomes a TypeError at connect time. Neon, for instance, hands out
+# `?sslmode=require&channel_binding=require`.
+_LIBPQ_ONLY_PARAMS = frozenset(
+    {
+        "channel_binding",
+        "connect_timeout",
+        "gssencmode",
+        "options",
+        "sslcert",
+        "sslkey",
+        "sslrootcert",
+        "target_session_attrs",
+    }
+)
 
-    Managed Postgres providers hand out URLs ending in `?sslmode=require`, but
-    asyncpg does not understand `sslmode` — it wants an `ssl` connect argument.
-    Leaving it in the URL raises `invalid connection option "sslmode"` at
-    connect time, so strip it here and translate.
+
+def _split_ssl_option(url: str) -> tuple[str, dict]:
+    """Translate a libpq-style URL into something asyncpg accepts.
+
+    Managed providers hand out URLs like
+    `postgresql://…/db?sslmode=require&channel_binding=require`. asyncpg wants
+    an `ssl` connect argument and rejects the rest outright, so translate
+    `sslmode` and drop the parameters that only libpq understands.
     """
     parts = urlsplit(url)
     query = dict(parse_qsl(parts.query))
@@ -28,6 +46,9 @@ def _split_ssl_option(url: str) -> tuple[str, dict]:
         # asyncpg accepts True/False or an SSLContext; the libpq words map onto
         # "do we require TLS at all".
         connect_args["ssl"] = ssl_value.lower() not in {"disable", "false", "0"}
+
+    for param in _LIBPQ_ONLY_PARAMS:
+        query.pop(param, None)
 
     cleaned = urlunsplit(
         (parts.scheme, parts.netloc, parts.path, urlencode(query), parts.fragment)
