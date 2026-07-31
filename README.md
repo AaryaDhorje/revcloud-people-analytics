@@ -146,6 +146,13 @@ shows *why* someone is flagged, and for a linear model "contribution =
 coefficient × standardised value" is exactly true rather than a post-hoc
 approximation.
 
+> **After retraining, restart the API and re-ingest.** `load_model()` is
+> `@lru_cache`d for the process lifetime, which is what you want on serverless
+> (each cold start reads the file once) but means a long-running dev server
+> keeps serving the previous artefact. Scores and driver labels are written
+> into `employees` at ingest time, so they only pick up a new model on the next
+> upload.
+
 **Model quality** — 5-fold cross-validated ROC-AUC **0.826 ± 0.023**
 (held-out 0.809, PR-AUC 0.559, Brier 0.148) on 1,470 rows with 44 features.
 Strongest signals: overtime, frequent business travel, being single, and the
